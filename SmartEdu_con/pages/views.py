@@ -9,3 +9,7 @@ def index(request):
 # About View
 def about(request):
     return render(request, 'about.html')
+
+# Contact View
+def contact(request):
+    return render(request, 'contact.html')
