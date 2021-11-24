@@ -15,8 +15,12 @@ def course_list(request):
 
 def course_detail(request, category_slug, course_id):
     course = Course.objects.get(category__slug = category_slug, id = course_id)
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
     context = {
-        'course' : course
+        'course' : course,
+        'categories' : categories,
+        'tags' : tags
     }
     return render(request, 'course.html', context)
 
