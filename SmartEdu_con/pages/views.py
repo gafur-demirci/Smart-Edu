@@ -1,6 +1,10 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
 from courses.models import Course
+from . forms import ContactForm
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Class Based View (TemplateView) 
 class IndexView(TemplateView):
@@ -14,8 +18,15 @@ class IndexView(TemplateView):
     
 class AboutView(TemplateView):
     template_name = 'about.html'
-class ContactView(TemplateView):
+class ContactView(SuccessMessageMixin, FormView):
     template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contact')
+    success_message = 'We received your request'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
     
 """ 
 from django.http import HttpResponse
