@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -28,11 +29,11 @@ class RegisterForm(UserCreationForm):
         'class' : 'form-control',
         'placeholder' : 'Email'
     }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class' : 'form-control',
         'placeholder' : 'Password'
     }))
-    password_confirmation = forms.CharField(widget=forms.PasswordInput(attrs={
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class' : 'form-control',
         'placeholder' : 'Re-Type Password'
     }))
@@ -42,8 +43,8 @@ class RegisterForm(UserCreationForm):
         fields = [
             'first_name',
             'last_name',
-            'username'
+            'username',
             'email',
-            'password',
-            'password_confirmation'
+            'password1',
+            'password2'
         ]
