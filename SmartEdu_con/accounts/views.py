@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def user_login(request):
@@ -54,5 +55,7 @@ def user_logout(request):
     logout(request)
     return redirect('index')
 
+@login_required(login_url='login')
 def user_dashboard(request):
-    pass
+    current_user = request.user
+    return render(request, 'dashboard.html')
